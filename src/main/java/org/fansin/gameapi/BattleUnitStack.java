@@ -3,6 +3,8 @@ package org.fansin.gameapi;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -12,11 +14,18 @@ public final class BattleUnitStack extends UnitStack {
     private final int startCount;
     private boolean rebuffedThisRound = false;
     private List<TemporaryModifier> modifiers = new ArrayList<>();
+    private Random random = new Random();
+    private Double currentDouble = smallRandom();
+    private Double nextDouble = smallRandom();
 
     public BattleUnitStack(UnitStack unitStack) {
         super(unitStack.unit, unitStack.count);
         startCount = count;
         lastUnitHipPoints = unit.getHitPoints();
+    }
+
+    private Double smallRandom() {
+        return random.nextDouble() / 100d;
     }
 
     private int calculateAttack(BattleUnitStack enemy) {
@@ -188,7 +197,7 @@ public final class BattleUnitStack extends UnitStack {
             initiative = feature.initiativeChange(initiative);
         }
 
-        return initiative;
+        return initiative + currentDouble;
     }
 
     public double calculateInitiativeOnNextRound() {
@@ -204,15 +213,17 @@ public final class BattleUnitStack extends UnitStack {
             initiative = feature.initiativeChange(initiative);
         }
 
-        return initiative;
+        return initiative + nextDouble;
     }
 
     public void endRound() {
         rebuffedThisRound = false;
 
-        Stream<TemporaryModifier> mods = modifiers.stream();
-        mods.forEach(TemporaryModifier::endRound);
-        modifiers = mods.filter(TemporaryModifier::isWorking).collect(Collectors.toList());
+        Supplier<Stream<TemporaryModifier>> modSupplier = () -> modifiers.stream();
+        modSupplier.get().forEach(TemporaryModifier::endRound);
+        modifiers = modSupplier.get().filter(TemporaryModifier::isWorking).collect(Collectors.toList());
+        currentDouble = nextDouble;
+        nextDouble = smallRandom();
     }
 
     public void addModifier(TemporaryModifier modifier) {
@@ -253,5 +264,9 @@ public final class BattleUnitStack extends UnitStack {
 
     public int getStartCount() {
         return startCount;
+    }
+
+    public Unit getUnit() {
+        return unit;
     }
 }

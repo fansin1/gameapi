@@ -1,30 +1,22 @@
 package org.fansin.gameapi;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-
 public class Battle {
 
-    private BattleArmy first;
-    private BattleArmy second;
+    private BattleArmy firstArmy;
+    private BattleArmy secondArmy;
 
-    private int move = 0;
     private int round = 1;
 
-    private List<BattleUnitStack> moveQueue = new ArrayList<>();
+    private MoveQueue moveQueue;
 
-    public Battle(BattleArmy first, BattleArmy second) {
-        this.first = first;
-        this.second = second;
-
-        moveQueue.addAll(first.getStacks());
-        moveQueue.addAll(second.getStacks());
-        moveQueue.sort(Comparator.comparingDouble(BattleUnitStack::calculateInitiative));
+    public Battle(BattleArmy firstArmy, BattleArmy secondArmy) {
+        this.firstArmy = firstArmy;
+        this.secondArmy = secondArmy;
+        moveQueue = new MoveQueue(firstArmy, secondArmy);
     }
 
     public boolean isStackInFirstArmy(BattleUnitStack stack) {
-        for (BattleUnitStack bus : first.getStacks()) {
+        for (BattleUnitStack bus : firstArmy.getStacks()) {
             if (bus == stack) {
                 return true;
             }
@@ -34,34 +26,55 @@ public class Battle {
     }
 
     public BattleArmy currentArmy() {
-        if (isStackInFirstArmy(currentStack()))
-            return first;
+        if (isStackInFirstArmy(moveQueue.currentStack()))
+            return firstArmy;
         else
-            return second;
+            return secondArmy;
     }
 
     public BattleArmy currentEnemyArmy() {
-        if (isStackInFirstArmy(currentStack()))
-            return second;
+        if (isStackInFirstArmy(moveQueue.currentStack()))
+            return secondArmy;
         else
-            return first;
+            return firstArmy;
     }
 
-    public void nextMove() {
-        move++;
-        if (move == moveQueue.size()) {
-            move = 0;
+    private void nextMove() {
+        if (moveQueue.size() == 1) {
             round++;
-            first.endRound();
-            second.endRound();
+            firstArmy.endRound();
+            secondArmy.endRound();
         }
+
+        moveQueue.nextMove();
     }
 
-    public BattleUnitStack currentStack() {
-        return moveQueue.get(move);
+    public void attack(BattleUnitStack enemy) {
+        moveQueue.currentStack().attack(enemy);
+        nextMove();
+    }
+
+    public void useSkill(int skillIndex, BattleUnitStack... targets) {
+        moveQueue.currentStack().useSkill(this, skillIndex, targets);
+        nextMove();
+    }
+
+    public void defend() {
+        moveQueue.currentStack().defend();
+        nextMove();
+    }
+
+    public void skip() {
+        moveQueue.skip();
+        nextMove();
     }
 
     public int getRound() {
         return round;
     }
+
+    public MoveQueue getMoveQueue() {
+        return moveQueue;
+    }
+
 }

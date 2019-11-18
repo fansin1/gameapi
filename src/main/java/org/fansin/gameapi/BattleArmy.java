@@ -9,13 +9,6 @@ public class BattleArmy {
 
     private List<BattleUnitStack> stacks;
 
-    public BattleArmy(List<BattleUnitStack> stacks) {
-        if (stacks.size() > 6)
-            throw new TooManyStacksException();
-
-        this.stacks = stacks;
-    }
-
     public BattleArmy(Army army) {
         stacks = new ArrayList<>();
 
