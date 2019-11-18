@@ -1,7 +1,7 @@
 package org.fansin.gameapi;
 
 import org.fansin.gameapi.exceptions.CastedOnWrongTargetException;
-import org.fansin.gameapi.exceptions.TooFewTargets;
+import org.fansin.gameapi.exceptions.TooFewTargetsException;
 import org.fansin.gameapi.exceptions.TooManyTargetsException;
 
 public interface Skill {
@@ -18,7 +18,7 @@ public interface Skill {
         if (targets.length > getTargetsCount())
             throw new TooManyTargetsException();
         if (targets.length < getTargetsCount())
-            throw new TooFewTargets();
+            throw new TooFewTargetsException();
 
         for (BattleUnitStack bus : targets) {
             if (!canBeCastedOn(bus))
