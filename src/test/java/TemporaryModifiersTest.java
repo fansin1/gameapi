@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.util.Collections;
 
 //Integration test for TemporaryModifier and BattleUnitStack
-class TemporaryModifiersAndBUSTest {
+class TemporaryModifiersTest {
 
     private Unit testUnit;
 
