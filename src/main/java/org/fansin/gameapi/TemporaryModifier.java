@@ -2,19 +2,19 @@ package org.fansin.gameapi;
 
 public interface TemporaryModifier {
 
-    default RebuffState canRebuff(RebuffState rebuffState, Unit actor, Unit enemy) {
+    default RebuffState canRebuff(RebuffState rebuffState, Unit actor, Unit target) {
         return RebuffState.STANDARD;
     }
 
-    default int defenceChange(int defence, Unit actor, Unit enemy) {
+    default int defenceChange(int defence, Unit actor, Unit target) {
         return defence;
     }
 
-    default int attackChange(int attack, Unit actor, Unit enemy) {
+    default int attackChange(int attack, Unit actor, Unit target) {
         return attack;
     }
 
-    default int damageChange(int damage, Unit actor, Unit enemy) {
+    default int damageChange(int damage, Unit actor, Unit target) {
         return damage;
     }
 
@@ -22,19 +22,19 @@ public interface TemporaryModifier {
         return initiative;
     }
 
-    default RebuffState enemyCanRebuff(RebuffState rebuffState, Unit actor, Unit enemy) {
+    default RebuffState enemyCanRebuff(RebuffState rebuffState, Unit actor, Unit target) {
         return RebuffState.STANDARD;
     }
 
-    default int enemyDefenceChange(int defence, Unit actor, Unit enemy) {
+    default int enemyDefenceChange(int defence, Unit actor, Unit target) {
         return defence;
     }
 
-    default int enemyAttackChange(int attack, Unit actor, Unit enemy) {
+    default int enemyAttackChange(int attack, Unit actor, Unit target) {
         return attack;
     }
 
-    default int enemyDamageChange(int damage, Unit actor, Unit enemy) {
+    default int enemyDamageChange(int damage, Unit actor, Unit target) {
         return damage;
     }
 

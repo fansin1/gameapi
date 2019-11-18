@@ -31,12 +31,12 @@ public enum Skills implements Skill {
         }
     },
 
-    BOOST {
+    ACCELERATION {
         @Override
         public void cast(Battle battle, BattleUnitStack actor, BattleUnitStack... targets) {
             super.cast(battle, actor, targets);
             for (BattleUnitStack bus : targets) {
-                bus.addModifier(TemporaryModifiers.BOOST);
+                bus.addModifier(TemporaryModifiers.ACCELERATION);
             }
         }
     },

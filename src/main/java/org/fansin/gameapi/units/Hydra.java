@@ -13,7 +13,7 @@ public class Hydra extends Unit {
         super(UnitTypes.HYDRA,
                 "Hydra",
                 new Damage(7, 14),
-                Arrays.asList(UnitFeatures.HITEVERYONE, UnitFeatures.ENEMYNORESIST),
+                Arrays.asList(/*UnitFeatures.HITEVERYONE, */UnitFeatures.ENEMYNORESIST),
                 Collections.emptyList(),
                 15, 80, 12, 7);
     }

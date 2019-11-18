@@ -15,8 +15,6 @@ public final class Army {
         this.stacks = stacks;
     }
 
-    public Army() {}
-
     public void addStack(UnitStack stack) {
         stacks.add(stack);
         if (stacks.size() > 6)

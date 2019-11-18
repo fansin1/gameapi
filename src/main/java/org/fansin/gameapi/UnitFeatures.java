@@ -28,7 +28,6 @@ public enum UnitFeatures implements UnitFeature {
             return RebuffState.CANT;
         }
     },
-    HITEVERYONE,
     ENDLESSREBUFF {
         @Override
         public RebuffState canRebuff(RebuffState rebuffState, Unit enemy) {

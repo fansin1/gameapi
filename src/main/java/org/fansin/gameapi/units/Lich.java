@@ -11,7 +11,7 @@ public class Lich extends Unit {
                 "Lich",
                 new Damage(12, 1726),
                 Arrays.asList(UnitFeatures.UNDEAD, UnitFeatures.SHOOTER),
-                Collections.emptyList(),
+                Collections.singletonList(Skills.RESURRECTION),
                 15, 50, 15, 10);
     }
 }

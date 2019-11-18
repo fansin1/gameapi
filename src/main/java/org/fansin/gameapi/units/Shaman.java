@@ -10,7 +10,7 @@ public class Shaman extends Unit {
                 "Shaman",
                 new Damage(7, 12),
                 Collections.emptyList(),
-                Collections.singletonList(Skills.BOOST),
+                Collections.singletonList(Skills.ACCELERATION),
                 12, 40, 10, 10.5);
     }
 }

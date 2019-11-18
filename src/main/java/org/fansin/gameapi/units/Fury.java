@@ -15,6 +15,6 @@ public class Fury extends Unit {
                 new Damage(5, 7),
                 Collections.singletonList(UnitFeatures.ENEMYNORESIST),
                 Collections.emptyList(),
-                5, 16, 3, 10);
+                5, 16, 3, 16);
     }
 }
