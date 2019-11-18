@@ -57,15 +57,13 @@ class UnitFeaturesTest {
 
     @Test
     void canRebuffTestMUST() {
-        BattleUnitStack bus1 = createTestBUS();
-        BattleUnitStack bus2 = createTestBUS();
-
-        bus1.addModifier(new TemporaryModifiersAndBUSTest.TestTemporaryModifier() {
+        BattleUnitStack bus1 = createTestBUS(new UnitFeature() {
             @Override
-            public RebuffState canRebuff(RebuffState rebuffState, Unit actor, Unit enemy) {
+            public RebuffState canRebuff(RebuffState rebuffState, Unit enemy) {
                 return RebuffState.MUST;
             }
         });
+        BattleUnitStack bus2 = createTestBUS();
 
         bus2.attack(bus1);
         int hpAfterFirst = calculateAllHp(bus2);
@@ -75,15 +73,13 @@ class UnitFeaturesTest {
 
     @Test
     void canRebuffTestSTANDARD() {
-        BattleUnitStack bus1 = createTestBUS();
-        BattleUnitStack bus2 = createTestBUS();
-
-        bus1.addModifier(new TemporaryModifiersAndBUSTest.TestTemporaryModifier() {
+        BattleUnitStack bus1 = createTestBUS(new UnitFeature() {
             @Override
-            public RebuffState canRebuff(RebuffState rebuffState, Unit actor, Unit enemy) {
+            public RebuffState canRebuff(RebuffState rebuffState, Unit enemy) {
                 return RebuffState.STANDARD;
             }
         });
+        BattleUnitStack bus2 = createTestBUS();
 
         bus2.attack(bus1);
         int hpAfterFirst = calculateAllHp(bus2);
@@ -92,15 +88,13 @@ class UnitFeaturesTest {
     }
 
     private void defenceChangeTest(int newDefence, int hpAll) {
-        BattleUnitStack bus1 = createTestBUS();
-        BattleUnitStack bus2 = createTestBUS();
-
-        bus1.addModifier(new TemporaryModifiersAndBUSTest.TestTemporaryModifier() {
+        BattleUnitStack bus1 = createTestBUS(new UnitFeature() {
             @Override
-            public int defenceChange(int defence, Unit actor, Unit enemy) {
+            public int defenceChange(int defence, Unit enemy) {
                 return newDefence;
             }
         });
+        BattleUnitStack bus2 = createTestBUS();
 
         bus2.attack(bus1);
         assertEquals(hpAll, calculateAllHp(bus1));
@@ -118,11 +112,9 @@ class UnitFeaturesTest {
 
     private void attackChangeTest(int newAttack, int hpAll) {
         BattleUnitStack bus1 = createTestBUS();
-        BattleUnitStack bus2 = createTestBUS();
-
-        bus2.addModifier(new TemporaryModifiersAndBUSTest.TestTemporaryModifier() {
+        BattleUnitStack bus2 = createTestBUS(new UnitFeature() {
             @Override
-            public int attackChange(int attack, Unit actor, Unit enemy) {
+            public int attackChange(int attack, Unit enemy) {
                 return newAttack;
             }
         });
@@ -148,11 +140,9 @@ class UnitFeaturesTest {
 
     private void damageChangeTest(int newDamage, int hpAll) {
         BattleUnitStack bus1 = createTestBUS();
-        BattleUnitStack bus2 = createTestBUS();
-
-        bus2.addModifier(new TemporaryModifiersAndBUSTest.TestTemporaryModifier() {
+        BattleUnitStack bus2 = createTestBUS(new UnitFeature() {
             @Override
-            public int damageChange(int damage, Unit actor, Unit enemy) {
+            public int damageChange(int attack, Unit enemy) {
                 return newDamage;
             }
         });
