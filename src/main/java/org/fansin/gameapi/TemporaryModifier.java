@@ -1,6 +1,12 @@
 package org.fansin.gameapi;
 
+import java.util.List;
+
 public interface TemporaryModifier {
+
+    default List<BattleUnitStack> changeTargets(Battle battle, List<BattleUnitStack> enemies) {
+        return enemies;
+    }
 
     default RebuffState canRebuff(RebuffState rebuffState, Unit actor, Unit target) {
         return RebuffState.STANDARD;

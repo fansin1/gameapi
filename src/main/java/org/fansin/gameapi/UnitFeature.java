@@ -1,6 +1,13 @@
 package org.fansin.gameapi;
 
+import java.util.Collections;
+import java.util.List;
+
 public interface UnitFeature {
+
+    default List<BattleUnitStack> changeTargets(Battle battle, List<BattleUnitStack> enemies) {
+        return enemies;
+    }
 
     default RebuffState canRebuff(RebuffState rebuffState, Unit enemy) {
         return RebuffState.STANDARD;

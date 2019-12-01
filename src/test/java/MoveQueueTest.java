@@ -56,11 +56,11 @@ public class MoveQueueTest {
         List<BattleUnitStack> bus = new ArrayList<>();
         Barracks barracks = Barracks.getInstance();
 
-        bus.add(getBUS(barracks.getUnit(Angel.class)));
-        bus.add(getBUS(barracks.getUnit(Crossbowman.class)));
-        bus.add(getBUS(barracks.getUnit(Cyclops.class)));
-        bus.add(getBUS(barracks.getUnit(Shaman.class)));
-        bus.add(getBUS(barracks.getUnit(Fury.class)));
+        bus.add(getBUS(barracks.getUnit("Angel")));
+        bus.add(getBUS(barracks.getUnit("Crossbowman")));
+        bus.add(getBUS(barracks.getUnit("Cyclops")));
+        bus.add(getBUS(barracks.getUnit("Shaman")));
+        bus.add(getBUS(barracks.getUnit("Fury")));
 
         return bus;
     }

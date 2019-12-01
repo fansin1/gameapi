@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public class BoneDragon extends Unit {
     public BoneDragon() {
-        super(UnitTypes.BONEDRAGON,
+        super(
                 "Bone Dragon",
                 new Damage(15, 30),
                 Collections.singletonList(UnitFeatures.UNDEAD),

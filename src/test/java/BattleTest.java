@@ -9,22 +9,27 @@ public class BattleTest {
 
     private void fillFirstUnitStack(List<UnitStack> unitStacks) {
         Barracks barracks = Barracks.getInstance();
-        unitStacks.add(new UnitStack(barracks.getUnit(Angel.class), 1));
-        unitStacks.add(new UnitStack(barracks.getUnit(Crossbowman.class), 3));
-        unitStacks.add(new UnitStack(barracks.getUnit(Fury.class), 2));
+        unitStacks.add(new UnitStack(barracks.getUnit("Angel"), 1));
+        unitStacks.add(new UnitStack(barracks.getUnit("Crossbowman"), 3));
+        unitStacks.add(new UnitStack(barracks.getUnit("Fury"), 2));
     }
 
     private void fillSecondUnitStack(List<UnitStack> unitStacks) {
         Barracks barracks = Barracks.getInstance();
-        unitStacks.add(new UnitStack(barracks.getUnit(Devil.class), 1));
-        unitStacks.add(new UnitStack(barracks.getUnit(Cyclops.class), 3));
-        unitStacks.add(new UnitStack(barracks.getUnit(Hydra.class), 2));
+        unitStacks.add(new UnitStack(barracks.getUnit("Devil"), 1));
+        unitStacks.add(new UnitStack(barracks.getUnit("Cyclops"), 3));
+        unitStacks.add(new UnitStack(barracks.getUnit("Hydra"), 2));
     }
 
     private void printHPInfo(BattleUnitStack battleUnitStack) {
         System.out.println(battleUnitStack.getUnit().getName() + " last unit HP " +
                 battleUnitStack.getLastUnitHipPoints() + "      " +
                 battleUnitStack.getUnit().getName() + "'s count " + battleUnitStack.getCount());
+    }
+
+    private void printInitiativeInfo(BattleUnitStack battleUnitStack) {
+        System.out.println(battleUnitStack.getUnit().getName() + " initiative = " +
+                battleUnitStack.calculateInitiative());
     }
 
     @BeforeAll
@@ -75,6 +80,8 @@ public class BattleTest {
 
         System.out.println();
 
+        printInitiativeInfo(devilStack);
+        printInitiativeInfo(angelStack);
         printHPInfo(devilStack);
         printHPInfo(angelStack);
         battle.attack(devilStack);

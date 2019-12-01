@@ -7,31 +7,31 @@ import java.util.List;
 
 public class BattleArmy {
 
-    private List<BattleUnitStack> stacks;
+    private List<BattleUnitStack> mStacks;
 
     public BattleArmy(Army army) {
-        stacks = new ArrayList<>();
+        mStacks = new ArrayList<>();
 
         for (UnitStack stack : army.getStacks()) {
-            stacks.add(new BattleUnitStack(stack));
+            mStacks.add(new BattleUnitStack(stack));
         }
 
-        if (stacks.size() > 6)
+        if (mStacks.size() > 6)
             throw new TooManyStacksException();
     }
 
     public void addStack(BattleUnitStack stack) {
-        stacks.add(stack);
-        if (stacks.size() > 9)
+        mStacks.add(stack);
+        if (mStacks.size() > 9)
             throw new TooManyStacksException();
     }
 
     public List<BattleUnitStack> getStacks() {
-        return Collections.unmodifiableList(stacks);
+        return Collections.unmodifiableList(mStacks);
     }
 
     public void endRound() {
-        for (BattleUnitStack bus : stacks) {
+        for (BattleUnitStack bus : mStacks) {
             bus.endRound();
         }
     }

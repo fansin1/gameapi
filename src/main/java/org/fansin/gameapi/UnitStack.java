@@ -2,24 +2,24 @@ package org.fansin.gameapi;
 
 public class UnitStack {
 
-    protected Unit unit;
-    protected int count;
+    protected Unit mUnit;
+    protected int mCount;
 
     public UnitStack(Unit unit, int count) {
-        this.unit = unit;
-        this.count = count;
+        this.mUnit = unit;
+        this.mCount = count;
     }
 
     public boolean isAlive() {
-        return count > 0;
+        return mCount > 0;
     }
 
     public int getCount() {
-        return count;
+        return mCount;
     }
 
     public void setCount(int count) {
-        this.count = count;
+        this.mCount = count;
     }
 
 }

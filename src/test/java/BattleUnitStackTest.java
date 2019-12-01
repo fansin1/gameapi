@@ -16,7 +16,7 @@ class BattleUnitStackTest {
         assertEquals(166, devilBUS.getLastUnitHipPoints());
         assertEquals(18, devilBUS.getCount());
 
-        angleBUS.attack(devilBUS);
+        angleBUS.attack(null, devilBUS);
 
         assertEquals(137, devilBUS.getLastUnitHipPoints());
         assertEquals(14, devilBUS.getCount());
@@ -42,7 +42,7 @@ class BattleUnitStackTest {
         assertEquals(166, devilBUS.getLastUnitHipPoints());
         assertEquals(18, devilBUS.getCount());
 
-        angleBUS.attack(devilBUS);
+        angleBUS.attack(null, devilBUS);
 
         assertEquals(91, devilBUS.getLastUnitHipPoints());
         assertEquals(12, devilBUS.getCount());

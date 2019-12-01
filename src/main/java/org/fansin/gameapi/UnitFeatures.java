@@ -1,5 +1,7 @@
 package org.fansin.gameapi;
 
+import java.util.List;
+
 public enum UnitFeatures implements UnitFeature {
     SHOOTER {
         @Override
@@ -10,6 +12,13 @@ public enum UnitFeatures implements UnitFeature {
         @Override
         public RebuffState enemyCanRebuff(RebuffState rebuffState,Unit enemy) {
             return RebuffState.CANT;
+        }
+    },
+
+    HITEVERYONE {
+        @Override
+        public List<BattleUnitStack> changeTargets(Battle battle, List<BattleUnitStack> enemies) {
+            return battle.currentEnemyArmy().getStacks();
         }
     },
 
@@ -33,5 +42,5 @@ public enum UnitFeatures implements UnitFeature {
         public RebuffState canRebuff(RebuffState rebuffState, Unit enemy) {
             return RebuffState.MUST;
         }
-    };
+    }
 }

@@ -5,60 +5,60 @@ import java.util.*;
 
 public class MoveQueue {
 
-    private List<BattleUnitStack> currentRound;
-    private List<BattleUnitStack> nextRound;
-    private boolean skipped = false;
-    private int skippedCount = 0;
+    private List<BattleUnitStack> mCurrentRound;
+    private List<BattleUnitStack> mNextRound;
+    private boolean mSkipped = false;
+    private int mSkippedCount = 0;
 
     public MoveQueue(List<BattleUnitStack> stacks) {
-        currentRound = new ArrayList<>(stacks);
-        nextRound = new ArrayList<>(stacks);
+        mCurrentRound = new ArrayList<>(stacks);
+        mNextRound = new ArrayList<>(stacks);
 
         updateOrder();
     }
 
     public MoveQueue(BattleArmy first, BattleArmy second) {
-        currentRound = new ArrayList<>(first.getStacks());
-        currentRound.addAll(second.getStacks());
-        nextRound = new ArrayList<>(currentRound);
+        mCurrentRound = new ArrayList<>(first.getStacks());
+        mCurrentRound.addAll(second.getStacks());
+        mNextRound = new ArrayList<>(mCurrentRound);
         updateOrder();
     }
 
     private void updateOrder() {
-        if (currentRound.size() >= skippedCount) {
-            currentRound.subList(0, currentRound.size() - skippedCount)
+        if (mCurrentRound.size() >= mSkippedCount) {
+            mCurrentRound.subList(0, mCurrentRound.size() - mSkippedCount)
                     .sort(Comparator.comparingDouble(BattleUnitStack::calculateInitiative).reversed());
         }
 
-        nextRound.sort(Comparator.comparingDouble(BattleUnitStack::calculateInitiativeOnNextRound).reversed());
+        mNextRound.sort(Comparator.comparingDouble(BattleUnitStack::calculateInitiativeOnNextRound).reversed());
     }
 
     private void startNewRound() {
-        currentRound.addAll(nextRound);
+        mCurrentRound.addAll(mNextRound);
     }
 
     private void deleteDead() {
-        currentRound.removeIf(stack -> !stack.isAlive());
-        nextRound.removeIf(stack -> !stack.isAlive());
+        mCurrentRound.removeIf(stack -> !stack.isAlive());
+        mNextRound.removeIf(stack -> !stack.isAlive());
     }
 
     public void nextMove() {
         deleteDead();
 
-        if (skipped) {
-            BattleUnitStack tmp = currentRound.get(0);
-            currentRound.remove(0);
-            currentRound.add(tmp);
-            skippedCount++;
+        if (mSkipped) {
+            BattleUnitStack tmp = mCurrentRound.get(0);
+            mCurrentRound.remove(0);
+            mCurrentRound.add(tmp);
+            mSkippedCount++;
         } else {
-            currentRound.remove(0);
+            mCurrentRound.remove(0);
         }
 
-        if (currentRound.isEmpty()) {
+        if (mCurrentRound.isEmpty()) {
             startNewRound();
         }
 
-        skipped = false;
+        mSkipped = false;
         updateOrder();
     }
 
@@ -66,32 +66,32 @@ public class MoveQueue {
         if (!canSkip())
             throw new SkipException();
 
-        skipped = true;
+        mSkipped = true;
     }
 
     public boolean canSkip() {
-        return skippedCount < currentRound.size();
+        return mSkippedCount < mCurrentRound.size();
     }
 
     public void addStack(BattleUnitStack bus) {
-        currentRound.add(bus);
-        nextRound.add(bus);
+        mCurrentRound.add(bus);
+        mNextRound.add(bus);
     }
 
     public BattleUnitStack currentStack() {
-        return currentRound.get(0);
+        return mCurrentRound.get(0);
     }
 
     public List<BattleUnitStack> getQueueCurrentRound() {
-        return Collections.unmodifiableList(currentRound);
+        return Collections.unmodifiableList(mCurrentRound);
     }
 
     public List<BattleUnitStack> getQueueNextRound() {
-        return Collections.unmodifiableList(nextRound);
+        return Collections.unmodifiableList(mNextRound);
     }
 
     public int size() {
-        return currentRound.size();
+        return mCurrentRound.size();
     }
 
 }

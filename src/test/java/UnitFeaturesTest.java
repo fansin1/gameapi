@@ -9,19 +9,15 @@ class UnitFeaturesTest {
     private Unit testUnit;
 
     private Unit getTestUnit(UnitFeature unitFeature) {
-        if (testUnit == null)
-            testUnit = new Unit(() ->
-                    "Test", "Test", new Damage(1, 1),
-                    Collections.singletonList(unitFeature), Collections.emptyList(), 10, 10, 10, 10
-            );
-
-        return testUnit;
+        return new Unit("Test", new Damage(1, 1),
+                Collections.singletonList(unitFeature),
+                Collections.emptyList(), 10, 10, 10, 10
+        );
     }
 
     private Unit getTestUnit() {
         if (testUnit == null)
-            testUnit = new Unit( () ->
-                    "Test", "Test", new Damage(1, 1),
+            testUnit = new Unit("Test", new Damage(1, 1),
                     Collections.emptyList(), Collections.emptyList(), 10, 10, 10, 10
             );
 
@@ -51,7 +47,7 @@ class UnitFeaturesTest {
         });
         BattleUnitStack bus2 = createTestBUS();
 
-        bus2.attack(bus1);
+        bus2.attack(null, bus1);
         assertEquals(getTestUnit().getHitPoints() * 10, calculateAllHp(bus2));
     }
 
@@ -65,9 +61,9 @@ class UnitFeaturesTest {
         });
         BattleUnitStack bus2 = createTestBUS();
 
-        bus2.attack(bus1);
+        bus2.attack(null, bus1);
         int hpAfterFirst = calculateAllHp(bus2);
-        bus2.attack(bus1);
+        bus2.attack(null, bus1);
         assertNotEquals(hpAfterFirst, calculateAllHp(bus2));
     }
 
@@ -81,9 +77,9 @@ class UnitFeaturesTest {
         });
         BattleUnitStack bus2 = createTestBUS();
 
-        bus2.attack(bus1);
+        bus2.attack(null, bus1);
         int hpAfterFirst = calculateAllHp(bus2);
-        bus2.attack(bus1);
+        bus2.attack(null, bus1);
         assertEquals(hpAfterFirst, calculateAllHp(bus2));
     }
 
@@ -96,7 +92,7 @@ class UnitFeaturesTest {
         });
         BattleUnitStack bus2 = createTestBUS();
 
-        bus2.attack(bus1);
+        bus2.attack(null, bus1);
         assertEquals(hpAll, calculateAllHp(bus1));
     }
 
@@ -119,7 +115,7 @@ class UnitFeaturesTest {
             }
         });
 
-        bus2.attack(bus1);
+        bus2.attack(null, bus1);
         assertEquals(hpAll, calculateAllHp(bus1));
     }
 
@@ -147,7 +143,7 @@ class UnitFeaturesTest {
             }
         });
 
-        bus2.attack(bus1);
+        bus2.attack(null, bus1);
         assertEquals(hpAll, calculateAllHp(bus1));
     }
 

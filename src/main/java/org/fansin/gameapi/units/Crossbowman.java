@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public class Crossbowman extends Unit {
     public Crossbowman() {
-        super(UnitTypes.CROSSBOWMAN,
+        super(
                 "Crossbowman",
                 new Damage(2, 8),
                 Arrays.asList(UnitFeatures.SHOOTER, UnitFeatures.ACCURATESHOT),

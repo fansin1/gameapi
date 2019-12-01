@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public class Griffin extends Unit {
     public Griffin() {
-        super(UnitTypes.GRIFFIN,
+        super(
                 "Griffin",
                 new Damage(5, 10),
                 Collections.singletonList(UnitFeatures.ENDLESSREBUFF),

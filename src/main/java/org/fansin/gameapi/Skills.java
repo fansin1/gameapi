@@ -47,7 +47,7 @@ public enum Skills implements Skill {
 
         @Override
         public boolean canBeCastedOn(BattleUnitStack target) {
-            for (UnitFeature uf : target.unit.getFeatures()) {
+            for (UnitFeature uf : target.mUnit.getFeatures()) {
                 if (uf == UnitFeatures.UNDEAD) {
                     return true;
                 }
@@ -63,5 +63,5 @@ public enum Skills implements Skill {
                 bus.healBy(HIT_POINT_PER_UNIT * actor.getCount());
             }
         }
-    };
+    }
 }

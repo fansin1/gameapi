@@ -6,26 +6,26 @@ import java.util.List;
 
 public final class Army {
 
-    private List<UnitStack> stacks;
+    private List<UnitStack> mStacks;
 
     public Army(List<UnitStack> stacks) {
         if (stacks.size() > 6)
             throw new TooManyStacksException();
 
-        this.stacks = stacks;
+        this.mStacks = stacks;
     }
 
     public void addStack(UnitStack stack) {
-        stacks.add(stack);
-        if (stacks.size() > 6)
+        mStacks.add(stack);
+        if (mStacks.size() > 6)
             throw new TooManyStacksException();
     }
 
     public int size() {
-        return stacks.size();
+        return mStacks.size();
     }
 
     public List<UnitStack> getStacks() {
-        return Collections.unmodifiableList(stacks);
+        return Collections.unmodifiableList(mStacks);
     }
 }

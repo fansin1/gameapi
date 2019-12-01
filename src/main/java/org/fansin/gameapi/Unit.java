@@ -5,18 +5,16 @@ import java.util.List;
 
 public class Unit {
 
-    private final UnitType type;
-    private final String name;
-    private final int hitPoints;
-    private final int attack;
-    private final Damage damage;
-    private final int defence;
-    private final double initiative;
-    private final List<UnitFeature> features;
-    private final List<Skill> skills;
+    private final String mName;
+    private final int mHitPoints;
+    private final int mAttack;
+    private final Damage mDamage;
+    private final int mDefence;
+    private final double mInitiative;
+    private final List<UnitFeature> mFeatures;
+    private final List<Skill> mSkills;
 
-    public Unit(UnitType type,
-                String name,
+    public Unit(String name,
                 Damage damage,
                 List<UnitFeature> features,
                 List<Skill> skills,
@@ -24,51 +22,46 @@ public class Unit {
                 int hitPoints,
                 int defence,
                 double initiative) {
-        this.type = type;
-        this.name = name;
-        this.hitPoints = hitPoints;
-        this.attack = attack;
-        this.damage = damage;
-        this.defence = defence;
-        this.initiative = initiative;
-        this.features = features;
-        this.skills = skills;
-    }
-
-    public UnitType getType() {
-        return type;
+        this.mName = name;
+        this.mHitPoints = hitPoints;
+        this.mAttack = attack;
+        this.mDamage = damage;
+        this.mDefence = defence;
+        this.mInitiative = initiative;
+        this.mFeatures = features;
+        this.mSkills = skills;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public List<UnitFeature> getFeatures() {
-        return Collections.unmodifiableList(features);
+        return Collections.unmodifiableList(mFeatures);
     }
 
     public List<Skill> getSkills() {
-        return Collections.unmodifiableList(skills);
+        return Collections.unmodifiableList(mSkills);
     }
 
     public int getHitPoints() {
-        return hitPoints;
+        return mHitPoints;
     }
 
     public Damage getDamage() {
-        return damage;
+        return mDamage;
     }
 
     public int getDefence() {
-        return defence;
+        return mDefence;
     }
 
     public double getInitiative() {
-        return initiative;
+        return mInitiative;
     }
 
     public int getAttack() {
-        return attack;
+        return mAttack;
     }
 
 }

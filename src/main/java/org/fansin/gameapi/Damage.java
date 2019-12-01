@@ -4,25 +4,25 @@ import java.util.Random;
 
 public final class Damage {
 
-    private int minDamage;
-    private int maxDamage;
-    private Random random = new Random();
+    private int mMinDamage;
+    private int mMaxDamage;
+    private Random mRandom = new Random();
 
     public int getMinDamage() {
-        return minDamage;
+        return mMinDamage;
     }
 
     public int getMaxDamage() {
-        return maxDamage;
+        return mMaxDamage;
     }
 
     public int getRandom() {
-        if (maxDamage == minDamage) return maxDamage;
-        return minDamage + random.nextInt(maxDamage - minDamage);
+        if (mMaxDamage == mMinDamage) return mMaxDamage;
+        return mMinDamage + mRandom.nextInt(mMaxDamage - mMinDamage);
     }
 
     public Damage(int minDamage, int maxDamage) {
-        this.minDamage = minDamage;
-        this.maxDamage = maxDamage;
+        this.mMinDamage = minDamage;
+        this.mMaxDamage = maxDamage;
     }
 }

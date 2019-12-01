@@ -3,13 +3,12 @@ package org.fansin.gameapi.units;
 import org.fansin.gameapi.Damage;
 import org.fansin.gameapi.Skills;
 import org.fansin.gameapi.Unit;
-import org.fansin.gameapi.UnitTypes;
 
 import java.util.Collections;
 
 public class Devil extends Unit {
     public Devil() {
-        super(UnitTypes.DEVIL,
+        super(
                 "Devil",
                 new Damage(36, 66),
                 Collections.emptyList(),

@@ -7,7 +7,7 @@ import java.util.Collections;
 
 public class Lich extends Unit {
     public Lich() {
-        super(UnitTypes.LICH,
+        super(
                 "Lich",
                 new Damage(12, 1726),
                 Arrays.asList(UnitFeatures.UNDEAD, UnitFeatures.SHOOTER),

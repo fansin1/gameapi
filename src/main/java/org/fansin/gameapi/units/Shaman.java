@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public class Shaman extends Unit {
     public Shaman() {
-        super(UnitTypes.SHAMAN,
+        super(
                 "Shaman",
                 new Damage(7, 12),
                 Collections.emptyList(),

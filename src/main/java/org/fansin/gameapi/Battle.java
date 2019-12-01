@@ -2,21 +2,21 @@ package org.fansin.gameapi;
 
 public class Battle {
 
-    private BattleArmy firstArmy;
-    private BattleArmy secondArmy;
+    private BattleArmy mFirstArmy;
+    private BattleArmy mSecondArmy;
 
     private int round = 1;
 
     private MoveQueue moveQueue;
 
     public Battle(BattleArmy firstArmy, BattleArmy secondArmy) {
-        this.firstArmy = firstArmy;
-        this.secondArmy = secondArmy;
+        this.mFirstArmy = firstArmy;
+        this.mSecondArmy = secondArmy;
         moveQueue = new MoveQueue(firstArmy, secondArmy);
     }
 
     public boolean isStackInFirstArmy(BattleUnitStack stack) {
-        for (BattleUnitStack bus : firstArmy.getStacks()) {
+        for (BattleUnitStack bus : mFirstArmy.getStacks()) {
             if (bus == stack) {
                 return true;
             }
@@ -27,30 +27,30 @@ public class Battle {
 
     public BattleArmy currentArmy() {
         if (isStackInFirstArmy(moveQueue.currentStack()))
-            return firstArmy;
+            return mFirstArmy;
         else
-            return secondArmy;
+            return mSecondArmy;
     }
 
     public BattleArmy currentEnemyArmy() {
         if (isStackInFirstArmy(moveQueue.currentStack()))
-            return secondArmy;
+            return mSecondArmy;
         else
-            return firstArmy;
+            return mFirstArmy;
     }
 
     private void nextMove() {
         if (moveQueue.size() == 1) {
             round++;
-            firstArmy.endRound();
-            secondArmy.endRound();
+            mFirstArmy.endRound();
+            mSecondArmy.endRound();
         }
 
         moveQueue.nextMove();
     }
 
     public void attack(BattleUnitStack enemy) {
-        moveQueue.currentStack().attack(enemy);
+        moveQueue.currentStack().attack(this, enemy);
         nextMove();
     }
 

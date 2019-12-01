@@ -1,28 +1,35 @@
 package org.fansin.gameapi;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Barracks {
 
-    private Map<Class<?>, Unit> units = new HashMap<>();
-    private static Barracks instance;
+    private Map<String, Unit> mUnits = new HashMap<>();
+    private static Barracks sInstance;
 
     private Barracks() { }
 
     public static Barracks getInstance() {
-        if (instance == null)
-            instance = new Barracks();
+        if (sInstance == null)
+            sInstance = new Barracks();
 
-        return instance;
+        return sInstance;
     }
 
     public void registerUnit(Unit unit) {
-        units.put(unit.getClass(), unit);
+        mUnits.put(unit.getName(), unit);
     }
 
-    public Unit getUnit(Class<? extends Unit> unitClass) {
-        return units.get(unitClass);
+    public Unit getUnit(String unitName) {
+        return mUnits.get(unitName);
+    }
+
+    public Iterator<String> getAllUnitsNames() {
+        return mUnits.keySet().iterator();
+    }
+
+    public Iterator<Unit> getAllUnits() {
+        return mUnits.values().iterator();
     }
 
 }

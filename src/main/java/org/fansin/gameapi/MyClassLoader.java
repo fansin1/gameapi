@@ -3,24 +3,23 @@ package org.fansin.gameapi;
 import org.fansin.gameapi.exceptions.TooLargeFileException;
 import java.io.*;
 
-public class ModsLoader extends ClassLoader {
+public class MyClassLoader extends ClassLoader {
 
-    private String pathToBin;
+    private String mPathToBin;
 
-    public ModsLoader(String pathToBin, ClassLoader parent) {
+    public MyClassLoader(String pathToBin, ClassLoader parent) {
         super(parent);
-        this.pathToBin = pathToBin;
+        this.mPathToBin = pathToBin;
     }
 
     @Override
     public Class<?> findClass(String className) throws ClassNotFoundException {
         try {
-            byte[] b = fetchClassFromFS(pathToBin + className + ".class");
+            byte[] b = fetchClassFromFS(mPathToBin + className + ".class");
             return defineClass(className, b, 0, b.length);
         } catch (IOException ex) {
             return super.findClass(className);
         }
-
     }
 
     private byte[] fetchClassFromFS(String path) throws IOException {
