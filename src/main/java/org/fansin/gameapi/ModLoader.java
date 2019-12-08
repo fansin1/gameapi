@@ -17,24 +17,48 @@ public class ModLoader {
         this.mClassLoader = new MyClassLoader(pathToModsDir, ClassLoader.getSystemClassLoader());
     }
 
-    public void registerUnits() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        File modsDir = new File(mPathToModsDir);
+    private void loadInDir(File modsDir, String dirName) {
+        File featuresDir = new File(modsDir, dirName);
 
-        String[] files = modsDir.list();
+        String[] files = featuresDir.list();
 
         if (files == null)
             throw new WrongDirException();
 
         for (String modName : files) {
-            Class clazz = mClassLoader.
-                    findClass(modName.substring(0, modName.length() - 6));
+            Object obj = mClassLoader.loadClassInDir(dirName, modName.substring(0, modName.length() - 6));
+        }
+    }
 
-            Object obj = clazz.newInstance();
+    private void loadModifiers(File modsDir) {
+        loadInDir(modsDir, "modifiers");
+    }
+
+    private void loadFeatures(File modsDir) throws ClassNotFoundException {
+        loadInDir(modsDir, "features");
+    }
+
+    public void registerUnits() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+        File modsDir = new File(mPathToModsDir);
+        loadFeatures(modsDir);
+        loadModifiers(modsDir);
+
+        File[] files = modsDir.listFiles();
+
+        if (files == null)
+            throw new WrongDirException();
+
+        for (File modFile : files) {
+            if (modFile.isDirectory())
+                continue;
+
+            String modName = modFile.getName();
+
+            Object obj = mClassLoader.findClass(modName.substring(0, modName.length() - 6)).newInstance();
 
             if (obj instanceof Unit) {
                 Barracks.getInstance().registerUnit((Unit)obj);
             }
         }
     }
-
 }
