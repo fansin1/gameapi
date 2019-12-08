@@ -1,5 +1,7 @@
 package org.fansin.gameapi;
 
+import org.fansin.gameapi.units.*;
+
 import java.util.*;
 
 public class Barracks {
@@ -7,7 +9,19 @@ public class Barracks {
     private Map<String, Unit> mUnits = new HashMap<>();
     private static Barracks sInstance;
 
-    private Barracks() { }
+    private Barracks() {
+        registerUnit(new Angel());
+        registerUnit(new BoneDragon());
+        registerUnit(new Crossbowman());
+        registerUnit(new Cyclops());
+        registerUnit(new Devil());
+        registerUnit(new Fury());
+        registerUnit(new Griffin());
+        registerUnit(new Hydra());
+        registerUnit(new Lich());
+        registerUnit(new Shaman());
+        registerUnit(new Skeleton());
+    }
 
     public static Barracks getInstance() {
         if (sInstance == null)
